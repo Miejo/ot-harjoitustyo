@@ -1,0 +1,113 @@
+commit 2ed61db4fdd22f9ef69a839371955a391371a4fc
+Author: Miejo <miejo@tutanota.com>
+Date:   Wed Oct 28 14:59:54 2020 +0200
+
+    poistettu file1, file2 nimi -> file22
+
+ tiedostoja/file2             | 0
+ tiedostoja/{file1 => file22} | 0
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+
+commit 9648e9bc5c05c26625171a44f80486c14d64c653
+Author: Miejo <miejo@tutanota.com>
+Date:   Wed Oct 28 14:55:42 2020 +0200
+
+    lisätty kansio tiedostoja
+
+ tiedostoja/file1 | 0
+ tiedostoja/file2 | 0
+ tiedostoja/file3 | 0
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+
+commit 9eb3b6ecf45c769836c026a395d5e4b948345c5a
+Author: Miejo <miejo@tutanota.com>
+Date:   Wed Oct 28 14:51:20 2020 +0200
+
+    muokattu eka ja kolmas
+
+ eka.txt    | 5 +++--
+ kolmas.txt | 3 ++-
+ 2 files changed, 5 insertions(+), 3 deletions(-)
+
+commit b0f6ca4683abd724fdbc6b82c3f4c3c800e6d26c
+Author: Miejo <miejo@tutanota.com>
+Date:   Wed Oct 28 14:49:03 2020 +0200
+
+    uudelleennimetty tiedosto.txt -> eka.txt
+
+ tiedosto.txt => eka.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit fd96359894ff269c77834ab2a99b9f62beef8b88
+Author: Miejo <miejo@tutanota.com>
+Date:   Wed Oct 28 14:47:31 2020 +0200
+
+    poistettu toinen.txt
+
+ toinen.txt | 1 -
+ 1 file changed, 1 deletion(-)
+
+commit 940e833d0196772a7553607113ba902182dd6857
+Author: Miejo <miejo@tutanota.com>
+Date:   Wed Oct 28 14:44:30 2020 +0200
+
+    muokattu tiedosto.txt
+
+ tiedosto.txt | 1 +
+ 1 file changed, 1 insertion(+)
+
+commit a51ab9e6b3cf8ca2fcb57c16f054ff7aac3787cc
+Author: Miejo <miejo@tutanota.com>
+Date:   Wed Oct 28 14:43:15 2020 +0200
+
+    lisätty tekstiä tiedosto.txt
+
+ tiedosto.txt | 1 +
+ 1 file changed, 1 insertion(+)
+
+commit cc25211eda90853fefc387450e50ff335a1afb92
+Author: Miejo <miejo@tutanota.com>
+Date:   Wed Oct 28 14:37:58 2020 +0200
+
+    lisätty kansio stuff
+
+ stuff/hehexd.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit f983c23fa4fed95f817cefc8cab358f969eb9a8e
+Author: Miejo <miejo@tutanota.com>
+Date:   Wed Oct 28 14:36:25 2020 +0200
+
+    muokattu toinen.txt ja kolmas.txt
+
+ kolmas.txt | 1 +
+ toinen.txt | 1 +
+ 2 files changed, 2 insertions(+)
+
+commit 3f643866733805e2dcaaf8a15614ed5e9f01f65f
+Author: Miejo <miejo@tutanota.com>
+Date:   Wed Oct 28 14:34:38 2020 +0200
+
+    kolmas.txt lisätty
+
+ kolmas.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 47801e13c1254985d5d0eba80cbdf42b9f4f0c7f
+Author: Miejo <miejo@tutanota.com>
+Date:   Wed Oct 28 14:31:51 2020 +0200
+
+    muutos ja lisäys
+
+ tiedosto.txt | 1 +
+ toinen.txt   | 0
+ 2 files changed, 1 insertion(+)
+
+commit 4e948df97face7713aa0a590c7ba78ac1bc09019
+Author: Miejo <miejo@tutanota.com>
+Date:   Wed Oct 28 14:30:20 2020 +0200
+
+    tiedosto.txt luotu
+
+ tiedosto.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)

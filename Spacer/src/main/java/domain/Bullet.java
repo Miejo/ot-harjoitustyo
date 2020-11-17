@@ -1,11 +1,8 @@
 package domain;
 
 import javafx.geometry.Rectangle2D;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 
 public class Bullet {
-    private Image image;
     private double positionX;
     private double positionY;
     private double velocity;
@@ -14,7 +11,6 @@ public class Bullet {
     public Bullet(double positionX, double positionY) {
         this.positionX = positionX;
         this.positionY = positionY;
-        image = new Image("bullet.png");
         velocity = 8;
         collisionBox = new Rectangle2D(positionX, positionY, 8, 8);
     }
@@ -31,11 +27,15 @@ public class Bullet {
         return false;
     }
     
-    public void render(GraphicsContext gc) {
-        gc.drawImage(image, positionX, positionY);
-    }
-    
     public Rectangle2D getCollisionBox() {
         return collisionBox;
+    }
+    
+    public double getPositionX() {
+        return positionX;
+    }
+    
+    public double getPositionY() {
+        return positionY;
     }
 }

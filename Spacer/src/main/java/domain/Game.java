@@ -1,11 +1,11 @@
 package domain;
 
 import java.util.ArrayList;
-import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 
 public class Game{
@@ -19,6 +19,9 @@ public class Game{
     private ArrayList<Bullet> deleteBullets;
     private ArrayList<Enemy> enemies;
     private ArrayList<Enemy> deleteEnemies;
+    private Image playerSprite;
+    private Image enemySprite;
+    private Image bulletSprite;
     // private long prevNanoTime;
     
     public Game (Canvas canvas, Scene scene) {
@@ -28,6 +31,9 @@ public class Game{
     
     public void initGame(){
         gc = canvas.getGraphicsContext2D();
+        playerSprite = new Image("spaceship.png");
+        enemySprite = new Image("enemy.png");
+        bulletSprite = new Image("bullet.png");
         player = new Player();
         input = new ArrayList<>();
         bullets = new ArrayList<>();
@@ -61,7 +67,7 @@ public class Game{
 
         for (Bullet b : bullets) {
             b.update();
-            b.render(gc);
+            gc.drawImage(bulletSprite, b.getPositionX(), b.getPositionY());
             if (b.outOfBounds()) {
                 deleteBullets.add(b);
             }
@@ -75,13 +81,13 @@ public class Game{
 
         for (Enemy e : enemies) {
             e.update();
-            e.render(gc);
+            gc.drawImage(enemySprite, e.getPositionX(), e.getPositionY());
             if (e.outOfBounds()) {
                 deleteEnemies.add(e);
             }
         }
 
-        player.render(gc);
+        gc.drawImage(playerSprite, player.getPositionX(), player.getPositionY());
     }
     
     public void setKeyPress(){

@@ -7,3 +7,27 @@ Sovellus on peli, jossa ammutaan ylhäältä tippuvia vihollisia. Tällä hetkel
 [Vaatimusmäärittely](https://github.com/Miejo/ot-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md)
 
 [Työaikakirjanpito](https://github.com/Miejo/ot-harjoitustyo/blob/master/dokumentaatio/tyoaikakirjanpito.md)
+
+## Komentorivitoiminnot
+
+### Suoritus
+
+Ohjelma suorittuu komentoriviltä komennolla
+
+```
+mvn compile exec:java -Dexec.mainClass=ui.GameUI
+```
+
+### Testaus
+
+Testit suoritetaan komennolla
+
+```
+mvn test
+```
+
+Testikattavuusraportti luodaan komennolla
+
+```
+mvn jacoco:report
+```

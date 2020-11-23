@@ -21,10 +21,7 @@ public class Bullet {
     }
     
     public boolean outOfBounds() {
-        if (positionY < 0) {
-            return true;
-        }
-        return false;
+        return positionY < 0;
     }
     
     public Rectangle2D getCollisionBox() {

@@ -21,10 +21,7 @@ public class Enemy {
     }
     
     public boolean outOfBounds() {
-        if (positionY > 600) {
-            return true;
-        }
-        return false;
+        return positionY > 600;
     }
     
     public Rectangle2D getCollisionBox() {

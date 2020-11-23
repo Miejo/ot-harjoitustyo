@@ -1,52 +1,35 @@
 package domain;
 
 import java.util.ArrayList;
-import javafx.event.EventHandler;
-import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
-import javafx.scene.input.KeyEvent;
 
 public class Game{
     
-    private GraphicsContext gc;
-    private final Canvas canvas;
-    private final Scene scene;
     private Player player;
     private ArrayList<String> input;
     private ArrayList<Bullet> bullets;
     private ArrayList<Bullet> deleteBullets;
     private ArrayList<Enemy> enemies;
     private ArrayList<Enemy> deleteEnemies;
-    private Image playerSprite;
-    private Image enemySprite;
-    private Image bulletSprite;
     // private long prevNanoTime;
     
-    public Game (Canvas canvas, Scene scene) {
-        this.canvas = canvas;
-        this.scene = scene;
+    public Game (ArrayList<String> input) {
+        this.input = input;
+        initGame();
     }
     
-    public void initGame(){
-        gc = canvas.getGraphicsContext2D();
-        playerSprite = new Image("spaceship.png");
-        enemySprite = new Image("enemy.png");
-        bulletSprite = new Image("bullet.png");
+    private void initGame(){
         player = new Player();
-        input = new ArrayList<>();
         bullets = new ArrayList<>();
         deleteBullets = new ArrayList<>();
         enemies = new ArrayList<>();
         deleteEnemies = new ArrayList<>();
         enemies.add(new Enemy());
-        setKeyPress();
     }
     
-    public void update(long currentNanoTime){
-        gc.clearRect(0, 0, 800, 600);
-
+    public void update(long currentNanoTime, ArrayList<String> _input){
+        
+        this.input = _input;
+        
         if (input.contains("LEFT")){
             player.moveLeft();
         }
@@ -67,7 +50,6 @@ public class Game{
 
         for (Bullet b : bullets) {
             b.update();
-            gc.drawImage(bulletSprite, b.getPositionX(), b.getPositionY());
             if (b.outOfBounds()) {
                 deleteBullets.add(b);
             }
@@ -80,35 +62,22 @@ public class Game{
         }
 
         for (Enemy e : enemies) {
-            e.update();
-            gc.drawImage(enemySprite, e.getPositionX(), e.getPositionY());
+            e.update();            
             if (e.outOfBounds()) {
                 deleteEnemies.add(e);
             }
         }
-
-        gc.drawImage(playerSprite, player.getPositionX(), player.getPositionY());
     }
     
-    public void setKeyPress(){
-        scene.setOnKeyPressed(
-            new EventHandler<KeyEvent>(){
-                public void handle(KeyEvent e) {
-                    String code = e.getCode().toString();
-
-                    if (!input.contains(code)) {
-                        input.add(code);
-                    }
-                }
-            }
-        );
-        scene.setOnKeyReleased(
-            new EventHandler<KeyEvent>(){
-                public void handle(KeyEvent e){
-                    String code = e.getCode().toString();
-                    input.remove(code);
-                }
-            }
-        );
+    public Player getPlayer() {
+        return player;
+    }
+    
+    public ArrayList<Bullet> getBullets() {
+        return bullets;
+    }
+    
+    public ArrayList<Enemy> getEnemies() {
+        return enemies;
     }
 }

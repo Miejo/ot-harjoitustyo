@@ -1,9 +1,9 @@
 package spacer;
 
-import ui.GameUI;
+import ui.MainUI;
 
 public class Main {
     public static void main(String[] args){
-        GameUI.main(args);
+        MainUI.main(args);
     }
 }

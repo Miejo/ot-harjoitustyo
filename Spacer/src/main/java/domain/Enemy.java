@@ -1,16 +1,19 @@
 package domain;
 
 import javafx.geometry.Rectangle2D;
+import java.util.Random;
 
 public class Enemy {
     private double positionX;
     private double positionY;
-    private double velocity;
+    private final double velocity;
     private Rectangle2D collisionBox;
+    private Random rand;
     
     public Enemy() {
         velocity = 2;
-        positionX = 600;
+        rand = new Random();
+        positionX = rand.nextInt(736);
         positionY = 10;
         collisionBox = new Rectangle2D(positionX, positionY, 64, 64);
     }

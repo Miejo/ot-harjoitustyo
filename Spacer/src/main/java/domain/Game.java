@@ -5,15 +5,21 @@ import java.util.ArrayList;
 public class Game{
     
     private Player player;
-    private ArrayList<String> input;
     private ArrayList<Bullet> bullets;
     private ArrayList<Bullet> deleteBullets;
     private ArrayList<Enemy> enemies;
     private ArrayList<Enemy> deleteEnemies;
-    // private long prevNanoTime;
     
-    public Game (ArrayList<String> input) {
-        this.input = input;
+    private long curTime;
+    private long timeBetweenShots;
+    private long lastShotTime;
+    private long timeBetweenEnemies;
+    private long lastEnemyTime;
+    
+    private int score;
+    private boolean endGame;
+    
+    public Game() {
         initGame();
     }
     
@@ -23,23 +29,35 @@ public class Game{
         deleteBullets = new ArrayList<>();
         enemies = new ArrayList<>();
         deleteEnemies = new ArrayList<>();
-        enemies.add(new Enemy());
+        lastShotTime = 0;
+        lastEnemyTime = 0;
+        score = 0;
+        endGame = false;
     }
     
-    public void update(long currentNanoTime, ArrayList<String> _input){
-        
-        this.input = _input;
+    public void update(long currentNanoTime, ArrayList<String> input){
+        curTime = currentNanoTime / 1000000000;
+        timeBetweenShots = curTime - lastShotTime;
+        timeBetweenEnemies = curTime - lastEnemyTime;
         
         if (input.contains("LEFT")){
             player.moveLeft();
         }
+        
         if (input.contains("RIGHT")){
             player.moveRight();
         }
-        if (input.contains("SPACE")){
-            bullets.add(new Bullet(player.getPositionX(), player.getPositionY()));
+        
+        if (input.contains("SPACE") && timeBetweenShots > 0.5){
+            bullets.add(new Bullet(player.getPositionX() + 28, player.getPositionY()));
+            lastShotTime = curTime;
         }
-
+        
+        if (timeBetweenEnemies > 1) {
+            enemies.add(new Enemy());
+            lastEnemyTime = curTime;
+        }
+        
         for (Bullet b : deleteBullets) {
             bullets.remove(b);
         }
@@ -57,6 +75,7 @@ public class Game{
                 if (b.getCollisionBox().intersects(e.getCollisionBox())) {
                     deleteBullets.add(b);
                     deleteEnemies.add(e);
+                    score++;
                 }
             }
         }
@@ -65,6 +84,7 @@ public class Game{
             e.update();            
             if (e.outOfBounds()) {
                 deleteEnemies.add(e);
+                endGame = true;
             }
         }
     }
@@ -79,5 +99,13 @@ public class Game{
     
     public ArrayList<Enemy> getEnemies() {
         return enemies;
+    }
+    
+    public int getScore() {
+        return score;
+    }
+    
+    public boolean getEndGame() {
+        return endGame;
     }
 }

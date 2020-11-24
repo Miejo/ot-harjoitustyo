@@ -7,4 +7,8 @@
 |16.11.|2h|Sovelluksen suunnittelua
 |17.11.|6h|Ohjelmointia
 ||1h|Dokumentaatio
-|yht.|14h|
+|23.11.|8h|Sovelluksen ohjelmointia
+|24.11.|2h|Sovelluksen ohjelmointia
+||1h|Testausta
+||2h|Dokumentaatio
+|yht.|27h|

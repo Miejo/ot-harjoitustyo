@@ -1,3 +1,0 @@
-username:Joona
-color:purple
-controls:arrow

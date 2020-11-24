@@ -1,8 +1,17 @@
 # Spacer
 
-Sovellus on peli, jossa ammutaan ylhäältä tippuvia vihollisia. Tällä hetkellä sovelluksen avautuu alkuvalikkoon, jossa vain "Start"-nappula toimii. Nappula aloittaa pelin, jossa on yksi vihollinen, jonka voi tuhota. Sovellus on suljettava manuaalisesti, eikä "peli" siis lopu koskaan.
+Sovellus on peli, jossa ammutaan ylhäältä tippuvia vihollisia.
+
+Viikko 4 uudet ominaisuudet:
+- Ammuntatiheyteen tauko
+- Vihollisia useita, satunnainen sijainti
+- Pistesysteemi
+- Asetukset; tiedosto ja toiminnallisuus
+- Värin ja nimen vaihto
 
 ## Dokumentaatio
+
+[Arkkitehtuuri](https://github.com/Miejo/ot-harjoitustyo/blob/master/dokumentaatio/arkkitehtuuri.md)
 
 [Vaatimusmäärittely](https://github.com/Miejo/ot-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md)
 
@@ -30,4 +39,12 @@ Testikattavuusraportti luodaan komennolla
 
 ```
 mvn jacoco:report
+```
+
+### Checkstyle
+
+Checkstyle suoritetaan komennolla
+
+```
+mvn jxr:jxr checkstyle:checkstyle
 ```

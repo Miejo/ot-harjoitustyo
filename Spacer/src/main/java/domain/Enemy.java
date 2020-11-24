@@ -13,7 +13,7 @@ public class Enemy {
     public Enemy() {
         velocity = 2;
         rand = new Random();
-        positionX = rand.nextInt(736);
+        positionX = rand.nextInt(737);
         positionY = 10;
         collisionBox = new Rectangle2D(positionX, positionY, 64, 64);
     }

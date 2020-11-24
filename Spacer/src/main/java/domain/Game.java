@@ -2,7 +2,7 @@ package domain;
 
 import java.util.ArrayList;
 
-public class Game{
+public class Game {
     
     private Player player;
     private ArrayList<Bullet> bullets;
@@ -23,7 +23,7 @@ public class Game{
         initGame();
     }
     
-    private void initGame(){
+    private void initGame() {
         player = new Player();
         bullets = new ArrayList<>();
         deleteBullets = new ArrayList<>();
@@ -35,20 +35,20 @@ public class Game{
         endGame = false;
     }
     
-    public void update(long currentNanoTime, ArrayList<String> input){
+    public void update(long currentNanoTime, ArrayList<String> input) {
         curTime = currentNanoTime / 1000000000;
         timeBetweenShots = curTime - lastShotTime;
         timeBetweenEnemies = curTime - lastEnemyTime;
         
-        if (input.contains("LEFT")){
+        if (input.contains("LEFT")) {
             player.moveLeft();
         }
         
-        if (input.contains("RIGHT")){
+        if (input.contains("RIGHT")) {
             player.moveRight();
         }
         
-        if (input.contains("SPACE") && timeBetweenShots > 0.5){
+        if (input.contains("SPACE") && timeBetweenShots > 0.5) {
             bullets.add(new Bullet(player.getPositionX() + 28, player.getPositionY()));
             lastShotTime = curTime;
         }
@@ -71,7 +71,7 @@ public class Game{
             if (b.outOfBounds()) {
                 deleteBullets.add(b);
             }
-            for (Enemy e :enemies){
+            for (Enemy e :enemies) {
                 if (b.getCollisionBox().intersects(e.getCollisionBox())) {
                     deleteBullets.add(b);
                     deleteEnemies.add(e);

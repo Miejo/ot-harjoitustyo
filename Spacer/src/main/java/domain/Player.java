@@ -2,8 +2,8 @@ package domain;
 
 public class Player {
     private double positionX;
-    private double positionY;
-    private double velocity;
+    private final double positionY;
+    private final double velocity;
     
     public Player() {
         velocity = 8;

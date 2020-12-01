@@ -2,12 +2,9 @@
 
 Sovellus on peli, jossa ammutaan ylhäältä tippuvia vihollisia.
 
-Viikko 4 uudet ominaisuudet:
-- Ammuntatiheyteen tauko
-- Vihollisia useita, satunnainen sijainti
-- Pistesysteemi
-- Asetukset; tiedosto ja toiminnallisuus
-- Värin ja nimen vaihto
+Viikko 5 uudet ominaisuudet:
+- Tulostaulu lisätty
+- Vaihdettu sovelluslogiikkaa perustumaan aikaan eikä ruutupäivitykseen
 
 ## Dokumentaatio
 
@@ -17,15 +14,11 @@ Viikko 4 uudet ominaisuudet:
 
 [Työaikakirjanpito](https://github.com/Miejo/ot-harjoitustyo/blob/master/dokumentaatio/tyoaikakirjanpito.md)
 
+## Releaset
+
+[Viikko 5](https://github.com/Miejo/ot-harjoitustyo/releases/tag/viikko5)
+
 ## Komentorivitoiminnot
-
-### Suoritus
-
-Ohjelma suorittuu komentoriviltä komennolla
-
-```
-mvn compile exec:java -Dexec.mainClass=ui.GameUI
-```
 
 ### Testaus
 
@@ -40,6 +33,16 @@ Testikattavuusraportti luodaan komennolla
 ```
 mvn jacoco:report
 ```
+
+### Jar-tiedoston luonti
+
+Jar-tiedoston luodaan komennollaa
+
+```
+mvn package
+```
+
+Luo target-hakemistoon jar-tiedoston _Spacer-1.0-SNAPSHOT.jar_. **HUOM** config.properties -tiedosto pitää olla samassa hakemistossa, jotta jar-tiedosto toimisi.
 
 ### Checkstyle
 

@@ -12,6 +12,6 @@
 ||1h|Testausta
 ||2h|Dokumentaatio
 |01.02.|4h|Sovelluksen ohjelmointia
-|01.02.|1h|JUnit testausten tekoa
-|01.02.|1h|Sekvenssikaavio, dokumentaation päivittäminen
+||1h|JUnit testausten tekoa
+||1h|Sekvenssikaavio, dokumentaation päivittäminen
 |yht.|33h|

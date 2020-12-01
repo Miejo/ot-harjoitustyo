@@ -52,23 +52,54 @@ public class Game {
         }
         
         if (input.contains("SPACE") && timeBetweenShots > 0.5) {
-            bullets.add(new Bullet(player.getPositionX() + 28, player.getPositionY()));
+            addBullet();
             lastShotTime = curTime;
         }
         
         if (timeBetweenEnemies > 1) {
-            enemies.add(new Enemy());
+            addEnemy();
             lastEnemyTime = curTime;
         }
         
-        for (Bullet b : deleteBullets) {
+        destroyBullets();
+        destroyEnemies();
+        updateBullets(deltaTime);
+        updateEnemies(deltaTime);
+        
+        prevTime = currentNanoTime;
+    }
+    
+    public void addBullet() {
+        bullets.add(new Bullet(player.getPositionX() + 28, player.getPositionY()));
+    }
+    
+    public void addEnemy() {
+        enemies.add(new Enemy());
+    }
+    
+    public void destroyBullets() {
+        deleteBullets.forEach((b) -> {
             bullets.remove(b);
-        }
-
-        for (Enemy e : deleteEnemies) {
+        });
+    }
+    
+    public void destroyEnemies() {
+        deleteEnemies.forEach((e) -> {
             enemies.remove(e);
+        });
+    }
+    
+    public void updateEnemies(float deltaTime) {
+        for (Enemy e : enemies) {
+            e.update(deltaTime);            
+            if (e.outOfBounds()) {
+                deleteEnemies.add(e);
+                endGame = true;
+            }
         }
-
+    }
+    
+    public void updateBullets(float deltaTime) {
         for (Bullet b : bullets) {
             b.update(deltaTime);
             if (b.outOfBounds()) {
@@ -82,16 +113,6 @@ public class Game {
                 }
             }
         }
-
-        for (Enemy e : enemies) {
-            e.update(deltaTime);            
-            if (e.outOfBounds()) {
-                deleteEnemies.add(e);
-                endGame = true;
-            }
-        }
-        
-        prevTime = currentNanoTime;
     }
     
     public Player getPlayer() {

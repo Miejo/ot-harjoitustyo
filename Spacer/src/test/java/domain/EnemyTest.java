@@ -21,9 +21,9 @@ public class EnemyTest {
         Enemy enemy = new Enemy();
         // CollisionBox is a rectangle at x, 10 with w of 64 and h of 64
         double testPosX = enemy.getPositionX();
-        enemy.update();
+        enemy.update(0.1f);
         // Updates collisionbox location to x, 10 + 2
         assertEquals(testPosX, enemy.getCollisionBox().getMinX(), 0.01);
-        assertEquals(76, enemy.getCollisionBox().getMaxY(), 0.01);
+        assertEquals(89, enemy.getCollisionBox().getMaxY(), 0.01);
     }
 }

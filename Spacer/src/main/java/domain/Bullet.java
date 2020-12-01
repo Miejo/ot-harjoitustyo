@@ -11,12 +11,12 @@ public class Bullet {
     public Bullet(double positionX, double positionY) {
         this.positionX = positionX;
         this.positionY = positionY;
-        velocity = 8;
+        velocity = 600;
         collisionBox = new Rectangle2D(positionX, positionY, 8, 8);
     }
     
-    public void update() {
-        positionY -= velocity;
+    public void update(float deltaTime) {
+        positionY -= velocity * deltaTime;
         collisionBox = new Rectangle2D(positionX, positionY, 8, 8);
     }
     

@@ -7,7 +7,6 @@ import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Properties;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
@@ -35,7 +34,7 @@ public class MainUI extends Application {
     private final Font titleFont = new Font("Arial", 42);
     private FileSettingsDao settingsDao;
     private FileLeaderboardDao leaderboardDao;
-    private LinkedHashMap<String, Integer> leaderboardMap;
+    private ArrayList<String> leaderboardList;
     private Leaderboard leaderboard;
     private ArrayList<String> colors;
     private GridPane leaderboardPane;
@@ -50,7 +49,7 @@ public class MainUI extends Application {
         settingsDao = new FileSettingsDao(settingsFile);
         leaderboardDao = new FileLeaderboardDao(leaderboardFile);
         leaderboard = new Leaderboard(leaderboardDao);
-        leaderboardMap = new LinkedHashMap<>();
+        leaderboardList = new ArrayList<>();
         colors = new ArrayList<>();
         leaderboardPane = new GridPane();
         leaderboardBackButton = new Button();
@@ -231,7 +230,7 @@ public class MainUI extends Application {
     
     public void updateLeaderboard() {
         leaderboardPane.getChildren().clear();
-        leaderboardMap = leaderboard.getTopTen();
+        leaderboardList = leaderboard.getTopTen();
         Label leaderboardTitleText = new Label("Leaderboard");
         leaderboardTitleText.setFont(titleFont);
         Label nameColLabel = new Label("Name");
@@ -250,9 +249,10 @@ public class MainUI extends Application {
         leaderboardPane.setVgap(10);
         leaderboardPane.setVgap(10);
         int[] gridID = new int[]{2};
-        leaderboardMap.forEach((k, v) -> {
-            leaderboardPane.add(new Label(k), 0, gridID[0]);
-            leaderboardPane.add(new Label(v.toString()), 1, gridID[0]);
+        leaderboardList.forEach((k) -> {
+            String[] entry = k.split("\\|");
+            leaderboardPane.add(new Label(entry[0]), 0, gridID[0]);
+            leaderboardPane.add(new Label(entry[1]), 1, gridID[0]);
             gridID[0]++;
         });
         leaderboardScene.setRoot(leaderboardPane);

@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.LinkedHashMap;
+import java.util.ArrayList;
 
 public class FileLeaderboardDao implements LeaderboardDao {
     private String sql;
@@ -51,15 +51,15 @@ public class FileLeaderboardDao implements LeaderboardDao {
     }
     
     @Override
-    public LinkedHashMap<String, Integer> getTopTen() {
-        LinkedHashMap<String, Integer> scores = new LinkedHashMap<>();
+    public ArrayList<String> getTopTen() {
+        ArrayList<String> scores = new ArrayList<>();
         try {
             Connection conn = this.connect();
             sql = "SELECT name, score FROM Scores ORDER BY score DESC LIMIT 10";
             Statement sment = conn.createStatement();
             ResultSet rSet = sment.executeQuery(sql);
             while (rSet.next()) {
-                scores.put(rSet.getString("name"), rSet.getInt("score"));
+                scores.add(rSet.getString("name") + "|" + rSet.getInt("score"));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());

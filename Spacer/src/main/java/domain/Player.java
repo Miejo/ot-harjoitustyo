@@ -6,20 +6,20 @@ public class Player {
     private final double velocity;
     
     public Player() {
-        velocity = 8;
+        velocity = 600;
         positionX = 400;
         positionY = 530;
     }
     
-    public void moveLeft() {
+    public void moveLeft(float deltaTime) {
         if (positionX > 0) {
-            positionX -= velocity;
+            positionX -= velocity * deltaTime;
         }
     }
     
-    public void moveRight() {
+    public void moveRight(float deltaTime) {
         if (positionX < 736) {
-            positionX += velocity;
+            positionX += velocity * deltaTime;
         }
     }
     

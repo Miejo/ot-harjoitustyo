@@ -1,10 +1,10 @@
 package dao;
 
 import java.sql.Connection;
-import java.util.LinkedHashMap;
+import java.util.ArrayList;
 
 public interface LeaderboardDao {
     Connection connect() throws Exception;
     void addScore(String name, int score) throws Exception;
-    LinkedHashMap<String, Integer> getTopTen() throws Exception;
+    ArrayList<String> getTopTen() throws Exception;
 }

@@ -1,7 +1,7 @@
 package domain;
 
 import dao.FileLeaderboardDao;
-import java.util.LinkedHashMap;
+import java.util.ArrayList;
 
 public class Leaderboard {
     private FileLeaderboardDao leaderboard;
@@ -10,9 +10,9 @@ public class Leaderboard {
         this.leaderboard = leaderboard;
     }
 
-    public LinkedHashMap<String, Integer> getTopTen(){
-        LinkedHashMap<String, Integer> leaderboardMap = leaderboard.getTopTen();
-        return leaderboardMap;
+    public ArrayList<String> getTopTen(){
+        ArrayList<String> leaderboardList = leaderboard.getTopTen();
+        return leaderboardList;
     }
     
     public boolean addScore(String name, int score){

@@ -11,15 +11,15 @@ public class Enemy {
     private Random rand;
     
     public Enemy() {
-        velocity = 2;
+        velocity = 150;
         rand = new Random();
         positionX = rand.nextInt(737);
         positionY = 10;
         collisionBox = new Rectangle2D(positionX, positionY, 64, 64);
     }
     
-    public void update() {
-        positionY += velocity;
+    public void update(float deltaTime) {
+        positionY += velocity * deltaTime;
         collisionBox = new Rectangle2D(positionX, positionY, 64, 64);
     }
     

@@ -11,6 +11,7 @@ public class Game {
     private ArrayList<Enemy> deleteEnemies;
     
     private long curTime;
+    private long prevTime;
     private long timeBetweenShots;
     private long lastShotTime;
     private long timeBetweenEnemies;
@@ -32,20 +33,22 @@ public class Game {
         lastShotTime = 0;
         lastEnemyTime = 0;
         score = 0;
+        prevTime = System.nanoTime();
         endGame = false;
     }
     
     public void update(long currentNanoTime, ArrayList<String> input) {
         curTime = currentNanoTime / 1000000000;
+        float deltaTime = (float) (currentNanoTime - prevTime) / 1000000000;
         timeBetweenShots = curTime - lastShotTime;
         timeBetweenEnemies = curTime - lastEnemyTime;
         
         if (input.contains("LEFT")) {
-            player.moveLeft();
+            player.moveLeft(deltaTime);
         }
         
         if (input.contains("RIGHT")) {
-            player.moveRight();
+            player.moveRight(deltaTime);
         }
         
         if (input.contains("SPACE") && timeBetweenShots > 0.5) {
@@ -67,7 +70,7 @@ public class Game {
         }
 
         for (Bullet b : bullets) {
-            b.update();
+            b.update(deltaTime);
             if (b.outOfBounds()) {
                 deleteBullets.add(b);
             }
@@ -81,12 +84,14 @@ public class Game {
         }
 
         for (Enemy e : enemies) {
-            e.update();            
+            e.update(deltaTime);            
             if (e.outOfBounds()) {
                 deleteEnemies.add(e);
                 endGame = true;
             }
         }
+        
+        prevTime = currentNanoTime;
     }
     
     public Player getPlayer() {

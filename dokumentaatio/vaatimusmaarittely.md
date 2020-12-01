@@ -12,14 +12,14 @@ Sovellus aukeaa GAME MENU -ruutuun, josta käyttäjä voi valita pelin aloittami
 
 ## Perustoiminnallisuus
 
-[x] Käyttäjä voi valita itselleen nimen, joka näkyy tulostaulussa
-[x] Käyttäjä voi vaihtaa hahmon väriä
-[ ] Käyttäjä voi valita joko WASD tai nuolinäppäimet toiminnallisuuksien tekemiseen pelissä
-[x] Pelissä liikutaan sivuttain ja ammutaan ylhäältä tippuvia vihollisia
-[x] Pisteitä saa ammuttaessa vihollisia
-[ ] Ajan kuluessa peli vaikenee, viholliset nopeutuvat ja niitä tulee enemmän
-[x] Peli loppuu, kun vihollinen saavuttaa pelaajaan/pelin alareunan
-[ ] Tulostaulu pitää kirjaa parhaista tuloksista
+- [x] Käyttäjä voi valita itselleen nimen, joka näkyy tulostaulussa
+- [x] Käyttäjä voi vaihtaa hahmon väriä
+- [ ] Käyttäjä voi valita joko WASD tai nuolinäppäimet toiminnallisuuksien tekemiseen pelissä
+- [x] Pelissä liikutaan sivuttain ja ammutaan ylhäältä tippuvia vihollisia
+- [x] Pisteitä saa ammuttaessa vihollisia
+- [ ] Ajan kuluessa peli vaikenee, viholliset nopeutuvat ja niitä tulee enemmän
+- [x] Peli loppuu, kun vihollinen saavuttaa pelaajaan/pelin alareunan
+- [x] Tulostaulu pitää kirjaa parhaista tuloksista
 
 ## Jatkokehitysideat
 

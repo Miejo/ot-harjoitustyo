@@ -1,5 +1,6 @@
 package ui;
 
+import domain.Leaderboard;
 import domain.Game;
 import domain.Player;
 import domain.Enemy;
@@ -29,6 +30,7 @@ public class GameUI {
     private Image enemySprite;
     private Image bulletSprite;
     private String scoreText;
+    private String nameText;
     private String color;
     private double hue;
     private double saturation;
@@ -38,13 +40,18 @@ public class GameUI {
     private ArrayList<Enemy> enemies;
     private Player player;
     
-    public GameUI(Canvas canvas, Scene scene, Stage stage, Scene endScene, Label endScoreText, String color) {
+    private Leaderboard leaderboard;
+    private String name;
+    
+    public GameUI(Canvas canvas, Scene scene, Stage stage, Scene endScene, Label endScoreText, String color, Leaderboard leaderboard, String name) {
         this.canvas = canvas;
         this.scene = scene;
         this.stage = stage;
         this.endScene = endScene;
         this.endScoreText = endScoreText;
         this.color = color;
+        this.leaderboard = leaderboard;
+        this.name = name;
         init();
         setKeyPress();
     }
@@ -57,6 +64,7 @@ public class GameUI {
         enemySprite = new Image("enemy.png");
         bulletSprite = new Image("bullet.png");
         scoreText = "Score: 0";
+        nameText = "Name: " + name;
         hue = 0;
         saturation = 1;
         switch (color) {
@@ -109,8 +117,10 @@ public class GameUI {
                 gc.drawImage(playerSprite, player.getPositionX(), player.getPositionY());
                 gc.setEffect(null);
                 gc.fillText(scoreText, 10, 10);
+                gc.fillText(nameText, 10, 20);
                 
                 if (game.getEndGame()) {
+                    leaderboard.addScore(name, game.getScore());
                     endScoreText.setText(scoreText);
                     stage.setScene(endScene);
                     this.stop();

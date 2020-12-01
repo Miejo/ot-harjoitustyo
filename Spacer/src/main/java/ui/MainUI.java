@@ -1,10 +1,13 @@
 package ui;
 
 import dao.FileSettingsDao;
+import dao.FileLeaderboardDao;
+import domain.Leaderboard;
 import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Properties;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
@@ -31,15 +34,26 @@ public class MainUI extends Application {
     private Scene gameScene;
     private final Font titleFont = new Font("Arial", 42);
     private FileSettingsDao settingsDao;
+    private FileLeaderboardDao leaderboardDao;
+    private LinkedHashMap<String, Integer> leaderboardMap;
+    private Leaderboard leaderboard;
     private ArrayList<String> colors;
+    private GridPane leaderboardPane;
+    private Button leaderboardBackButton;
     
     @Override
     public void init() throws Exception {
         Properties properties = new Properties();
         properties.load(new FileInputStream("config.properties"));
         String settingsFile = properties.getProperty("settingsFile");
+        String leaderboardFile = properties.getProperty("leaderboardFile");
         settingsDao = new FileSettingsDao(settingsFile);
+        leaderboardDao = new FileLeaderboardDao(leaderboardFile);
+        leaderboard = new Leaderboard(leaderboardDao);
+        leaderboardMap = new LinkedHashMap<>();
         colors = new ArrayList<>();
+        leaderboardPane = new GridPane();
+        leaderboardBackButton = new Button();
         colors.addAll(Arrays.asList("white", "red", "blue", "yellow", "green", "orange", "purple"));
     }
     
@@ -118,19 +132,6 @@ public class MainUI extends Application {
         settingsScene = new Scene(settingsPane, 800, 600);
         
         // Leaderboard components
-        Label leaderboardTitleText = new Label("Leaderboard");
-        leaderboardTitleText.setFont(titleFont);
-        Button leaderboardBackButton = new Button("Back");
-        leaderboardBackButton.setMaxSize(150, 200);
-        
-        GridPane leaderboardPane = new GridPane();
-        leaderboardPane.add(leaderboardTitleText, 0, 0);
-        leaderboardPane.add(leaderboardBackButton, 0, 1);
-        
-        leaderboardPane.setAlignment(Pos.CENTER);
-        GridPane.setHalignment(leaderboardTitleText, HPos.CENTER);
-        leaderboardPane.setVgap(10);
-        leaderboardPane.setVgap(10);
         
         leaderboardScene = new Scene(leaderboardPane, 800, 600);
         
@@ -165,7 +166,7 @@ public class MainUI extends Application {
         // Button logic
         startButton.setOnAction(e-> {
             mainStage.setScene(gameScene);
-            GameUI gameUI = new GameUI(gameCanvas, gameScene, mainStage, endScene, endScoreText, settings.get("color"));
+            GameUI gameUI = new GameUI(gameCanvas, gameScene, mainStage, endScene, endScoreText, settings.get("color"), leaderboard, settings.get("username"));
             gameUI.run();
         });
         
@@ -174,6 +175,7 @@ public class MainUI extends Application {
         });
         
         leaderboardButton.setOnAction(e-> {
+            updateLeaderboard();
             mainStage.setScene(leaderboardScene);
         });
         
@@ -225,6 +227,35 @@ public class MainUI extends Application {
         mainStage.setTitle("Spacer");
         mainStage.setScene(startMenuScene);
         mainStage.show();
+    }
+    
+    public void updateLeaderboard() {
+        leaderboardPane.getChildren().clear();
+        leaderboardMap = leaderboard.getTopTen();
+        Label leaderboardTitleText = new Label("Leaderboard");
+        leaderboardTitleText.setFont(titleFont);
+        Label nameColLabel = new Label("Name");
+        Label scoreColLabel = new Label("Score");
+        leaderboardBackButton.setText("Back");
+        leaderboardBackButton.setMaxSize(150, 200);
+        
+        leaderboardPane = new GridPane();
+        leaderboardPane.add(leaderboardTitleText, 0, 0);
+        leaderboardPane.add(nameColLabel, 0, 1);
+        leaderboardPane.add(scoreColLabel, 1, 1);
+        leaderboardPane.add(leaderboardBackButton, 0, 12);
+        
+        leaderboardPane.setAlignment(Pos.CENTER);
+        GridPane.setHalignment(leaderboardTitleText, HPos.CENTER);
+        leaderboardPane.setVgap(10);
+        leaderboardPane.setVgap(10);
+        int[] gridID = new int[]{2};
+        leaderboardMap.forEach((k, v) -> {
+            leaderboardPane.add(new Label(k), 0, gridID[0]);
+            leaderboardPane.add(new Label(v.toString()), 1, gridID[0]);
+            gridID[0]++;
+        });
+        leaderboardScene.setRoot(leaderboardPane);
     }
     
     public static void main(String[] args) {

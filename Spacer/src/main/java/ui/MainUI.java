@@ -222,6 +222,12 @@ public class MainUI extends Application {
             settingsDao.create(settings);
         });
 
+        settingsNameField.textProperty().addListener((observable, oldValue, newValue) -> {
+           if (!newValue.matches("\\sa-zA-Z*")) {
+               settingsNameField.setText(newValue.replaceAll("[^\\\\sa-zA-Z]", ""));
+           } 
+        });
+        
         // Set starting scene
         mainStage.setTitle("Spacer");
         mainStage.setScene(startMenuScene);

@@ -28,7 +28,7 @@ public class FileLeaderboardDao implements LeaderboardDao {
     public Connection connect() {
         Connection conn = null;
         try {
-           conn = DriverManager.getConnection(url);
+            conn = DriverManager.getConnection(url);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

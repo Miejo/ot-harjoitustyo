@@ -10,12 +10,12 @@ public class Leaderboard {
         this.leaderboard = leaderboard;
     }
 
-    public ArrayList<String> getTopTen(){
+    public ArrayList<String> getTopTen() {
         ArrayList<String> leaderboardList = leaderboard.getTopTen();
         return leaderboardList;
     }
     
-    public boolean addScore(String name, int score){
+    public boolean addScore(String name, int score) {
         try {
             leaderboard.addScore(name, score);
         } catch (Exception e) {

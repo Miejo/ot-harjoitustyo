@@ -43,13 +43,7 @@ public class Game {
         timeBetweenShots = curTime - lastShotTime;
         timeBetweenEnemies = curTime - lastEnemyTime;
         
-        if (input.contains("LEFT")) {
-            player.moveLeft(deltaTime);
-        }
-        
-        if (input.contains("RIGHT")) {
-            player.moveRight(deltaTime);
-        }
+        playerMovement(deltaTime, input);
         
         if (input.contains("SPACE") && timeBetweenShots > 0.5) {
             addBullet();
@@ -67,6 +61,16 @@ public class Game {
         updateEnemies(deltaTime);
         
         prevTime = currentNanoTime;
+    }
+    
+    public void playerMovement(float deltaTime, ArrayList<String> input) {
+        if (input.contains("LEFT")) {
+            player.moveLeft(deltaTime);
+        }
+        
+        if (input.contains("RIGHT")) {
+            player.moveRight(deltaTime);
+        }
     }
     
     public void addBullet() {

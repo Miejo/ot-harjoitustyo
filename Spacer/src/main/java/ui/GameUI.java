@@ -101,6 +101,8 @@ public class GameUI {
         {
             public void handle(long currentNanoTime) {
                 gc.clearRect(0, 0, 800, 600);
+                gc.setFill(Color.DARKSLATEBLUE);
+                gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
                 game.update(currentNanoTime, input);
                 bullets = game.getBullets();
                 enemies = game.getEnemies();
@@ -120,9 +122,10 @@ public class GameUI {
                 gc.setEffect(colorAdjust);
                 gc.drawImage(playerSprite, player.getPositionX(), player.getPositionY());
                 gc.setEffect(null);
-                gc.fillText(scoreText, 10, 10);
-                gc.fillText(nameText, 10, 20);
-                gc.fillText(timeText, 10, 30);
+                gc.setFill(Color.WHITE);
+                gc.fillText(nameText, 10, 10);
+                gc.fillText(scoreText, 10, 25);
+                gc.fillText(timeText, 10, 40);
                 
                 if (game.getEndGame()) {
                     leaderboard.addScore(name, game.getScore());

@@ -20,11 +20,14 @@ public class Game {
     private int score;
     private boolean endGame;
     
-    public Game() {
-        initGame();
+    private String left;
+    private String right;
+    
+    public Game(String controls) {
+        initGame(controls);
     }
     
-    private void initGame() {
+    private void initGame(String controls) {
         player = new Player();
         bullets = new ArrayList<>();
         deleteBullets = new ArrayList<>();
@@ -35,6 +38,12 @@ public class Game {
         score = 0;
         prevTime = System.nanoTime();
         endGame = false;
+        left = "LEFT";
+        right = "RIGHT";
+        if (controls.equals("arrow")) {
+            left = "A";
+            right = "D";
+        }
     }
     
     public void update(long currentNanoTime, ArrayList<String> input) {
@@ -64,11 +73,11 @@ public class Game {
     }
     
     public void playerMovement(float deltaTime, ArrayList<String> input) {
-        if (input.contains("LEFT")) {
+        if (input.contains(left)) {
             player.moveLeft(deltaTime);
         }
         
-        if (input.contains("RIGHT")) {
+        if (input.contains(right)) {
             player.moveRight(deltaTime);
         }
     }

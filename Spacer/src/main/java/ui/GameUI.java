@@ -32,6 +32,8 @@ public class GameUI {
     private String scoreText;
     private String nameText;
     private String color;
+    private String name;
+    private String controls;
     private double hue;
     private double saturation;
     
@@ -41,9 +43,8 @@ public class GameUI {
     private Player player;
     
     private Leaderboard leaderboard;
-    private String name;
     
-    public GameUI(Canvas canvas, Scene scene, Stage stage, Scene endScene, Label endScoreText, String color, Leaderboard leaderboard, String name) {
+    public GameUI(Canvas canvas, Scene scene, Stage stage, Scene endScene, Label endScoreText, String color, Leaderboard leaderboard, String name, String controls) {
         this.canvas = canvas;
         this.scene = scene;
         this.stage = stage;
@@ -52,6 +53,7 @@ public class GameUI {
         this.color = color;
         this.leaderboard = leaderboard;
         this.name = name;
+        this.controls = controls;
         init();
         setKeyPress();
     }
@@ -93,7 +95,7 @@ public class GameUI {
     }
     
     public void run() {
-        Game game = new Game();
+        Game game = new Game(controls);
         new AnimationTimer()
         {
             public void handle(long currentNanoTime) {

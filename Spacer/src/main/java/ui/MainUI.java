@@ -165,7 +165,7 @@ public class MainUI extends Application {
         // Button logic
         startButton.setOnAction(e-> {
             mainStage.setScene(gameScene);
-            GameUI gameUI = new GameUI(gameCanvas, gameScene, mainStage, endScene, endScoreText, settings.get("color"), leaderboard, settings.get("username"));
+            GameUI gameUI = new GameUI(gameCanvas, gameScene, mainStage, endScene, endScoreText, settings.get("color"), leaderboard, settings.get("username"), settings.get("controls"));
             gameUI.run();
         });
         

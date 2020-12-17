@@ -31,6 +31,7 @@ public class GameUI {
     private Image bulletSprite;
     private String scoreText;
     private String nameText;
+    private String timeText;
     private String color;
     private String name;
     private String controls;
@@ -105,6 +106,7 @@ public class GameUI {
                 enemies = game.getEnemies();
                 player = game.getPlayer();
                 scoreText = "Score: " + game.getScore();
+                timeText = "Time: " + game.getTimeElapsed();
                 
                 for (Bullet b : bullets) {
                     gc.drawImage(bulletSprite, b.getPositionX(), b.getPositionY());
@@ -120,6 +122,7 @@ public class GameUI {
                 gc.setEffect(null);
                 gc.fillText(scoreText, 10, 10);
                 gc.fillText(nameText, 10, 20);
+                gc.fillText(timeText, 10, 30);
                 
                 if (game.getEndGame()) {
                     leaderboard.addScore(name, game.getScore());

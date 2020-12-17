@@ -12,10 +12,12 @@ public class Game {
     
     private long curTime;
     private long prevTime;
+    private long startTime;
     private long timeBetweenShots;
     private long lastShotTime;
     private long timeBetweenEnemies;
     private long lastEnemyTime;
+    private long timeElapsed;
     
     private int score;
     private boolean endGame;
@@ -33,10 +35,12 @@ public class Game {
         deleteBullets = new ArrayList<>();
         enemies = new ArrayList<>();
         deleteEnemies = new ArrayList<>();
+        startTime = System.nanoTime();
         lastShotTime = 0;
         lastEnemyTime = 0;
+        prevTime = startTime;
+        timeElapsed = 0;
         score = 0;
-        prevTime = System.nanoTime();
         endGame = false;
         left = "LEFT";
         right = "RIGHT";
@@ -49,6 +53,7 @@ public class Game {
     public void update(long currentNanoTime, ArrayList<String> input) {
         curTime = currentNanoTime / 1000000000;
         float deltaTime = (float) (currentNanoTime - prevTime) / 1000000000;
+        timeElapsed = (currentNanoTime - startTime) / 1000000000;
         timeBetweenShots = curTime - lastShotTime;
         timeBetweenEnemies = curTime - lastEnemyTime;
         
@@ -59,9 +64,27 @@ public class Game {
             lastShotTime = curTime;
         }
         
-        if (timeBetweenEnemies > 1) {
-            addEnemy();
-            lastEnemyTime = curTime;
+        if (timeElapsed < 10) {
+            if (timeBetweenEnemies > 1) {
+                addEnemy();
+                lastEnemyTime = curTime;
+            }
+        } else if (timeElapsed < 20) {
+            if (timeBetweenEnemies > 0.5) {
+                addEnemy();
+                lastEnemyTime = curTime;
+            }
+        } else if (timeElapsed < 30) {
+            if (timeBetweenEnemies > 0.1) {
+                addEnemy();
+                lastEnemyTime = curTime;
+            }
+        } else if (timeElapsed >= 30) {
+            if (timeBetweenEnemies > 0.1) {
+                addEnemy();
+                addEnemy();
+                lastEnemyTime = curTime;
+            }
         }
         
         destroyBullets();
@@ -146,5 +169,9 @@ public class Game {
     
     public boolean getEndGame() {
         return endGame;
+    }
+    
+    public long getTimeElapsed() {
+        return timeElapsed;
     }
 }

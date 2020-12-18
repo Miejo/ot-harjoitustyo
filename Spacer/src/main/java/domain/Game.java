@@ -1,7 +1,9 @@
 package domain;
 
 import java.util.ArrayList;
-
+/**
+ * Luokka huolehtii pelin päälogiikasta ja käyttää muita logiikkaluokkia.
+ */
 public class Game {
     
     private Player player;
@@ -18,12 +20,19 @@ public class Game {
     private long timeBetweenEnemies;
     private long lastEnemyTime;
     private long timeElapsed;
+    private float deltaTime;
     
     private int score;
     private boolean endGame;
     
     private String left;
     private String right;
+    
+    /**
+     * Konstruktori, joka kutsuu initGame metodia, joka alustaa pelin.
+     * 
+     * @param controls Asetuksista controls, joko "WASD" tai "arrow"
+     */
     
     public Game(String controls) {
         initGame(controls);
@@ -49,10 +58,15 @@ public class Game {
             right = "D";
         }
     }
-    
+    /**
+     * Game loop, huolehtii pelin päivittämisestä, kutsutaan kerran framessa.
+     * 
+     * @param currentNanoTime handle metodista saatava tämän hetken aika
+     * @param input Käyttäjän syöte
+     */
     public void update(long currentNanoTime, ArrayList<String> input) {
         curTime = currentNanoTime / 1000000000;
-        float deltaTime = (float) (currentNanoTime - prevTime) / 1000000000;
+        deltaTime = (float) (currentNanoTime - prevTime) / 1000000000;
         timeElapsed = (currentNanoTime - startTime) / 1000000000;
         timeBetweenShots = curTime - lastShotTime;
         timeBetweenEnemies = curTime - lastEnemyTime;
@@ -64,28 +78,7 @@ public class Game {
             lastShotTime = curTime;
         }
         
-        if (timeElapsed < 10) {
-            if (timeBetweenEnemies > 1) {
-                addEnemy();
-                lastEnemyTime = curTime;
-            }
-        } else if (timeElapsed < 20) {
-            if (timeBetweenEnemies > 0.5) {
-                addEnemy();
-                lastEnemyTime = curTime;
-            }
-        } else if (timeElapsed < 30) {
-            if (timeBetweenEnemies > 0.1) {
-                addEnemy();
-                lastEnemyTime = curTime;
-            }
-        } else if (timeElapsed >= 30) {
-            if (timeBetweenEnemies > 0.1) {
-                addEnemy();
-                addEnemy();
-                lastEnemyTime = curTime;
-            }
-        }
+        spawnEnemies();
         
         destroyBullets();
         destroyEnemies();
@@ -94,6 +87,13 @@ public class Game {
         
         prevTime = currentNanoTime;
     }
+    
+    /**
+     * Metodi kutsuu player-luokan move-metodeja, riippuen käyttäjän syötteestä
+     * 
+     * @param deltaTime Kahden update-syklin väliin kuluva aika
+     * @param input Käyttäjän syöte
+     */
     
     public void playerMovement(float deltaTime, ArrayList<String> input) {
         if (input.contains(left)) {
@@ -105,26 +105,46 @@ public class Game {
         }
     }
     
+    /**
+     * Metodi lisää ammuksista kirjaa pitävään ArrayList:iin uusi Bullet-olio.
+     */
+    
     public void addBullet() {
         bullets.add(new Bullet(player.getPositionX() + 28, player.getPositionY()));
     }
     
+    /**
+     * Metodi lisää vihollisista kirjaa pitävään ArrayList:iin uusi Enemy-olio.
+     */
     public void addEnemy() {
         enemies.add(new Enemy());
     }
     
+    /**
+     * Metodi poistaa ammuksista kirjaa pitävästä ArrayList:sta Bullet-oliot,
+     * jotka on tarkoitus poistaa.
+     */
     public void destroyBullets() {
         deleteBullets.forEach((b) -> {
             bullets.remove(b);
         });
     }
     
+    /**
+     * Metodi poistaa vihollisista kirjaa pitävästä ArrayList:sta Enemy-oliot,
+     * jotka on tarkoitus poistaa.
+     */
     public void destroyEnemies() {
         deleteEnemies.forEach((e) -> {
             enemies.remove(e);
         });
     }
     
+    /**
+     * Metodi kutsuu jokaisen Enemy-olion update metodia ja
+     * tarkistaa onko olio ruudun ulkopuolella.
+     * @param deltaTime Kahden update-syklin väliin kuluva aika
+     */
     public void updateEnemies(float deltaTime) {
         for (Enemy e : enemies) {
             e.update(deltaTime);            
@@ -135,6 +155,11 @@ public class Game {
         }
     }
     
+    /**
+     * Metodi kutsuu jokaisen Bullet-olion update metodia ja
+     * tarkistaa onko olio ruudun ulkopuolella sekä ammuksen ja vihollisen mahdollisen törmäyksen.
+     * @param deltaTime Kahden update-syklin väliin kuluva aika
+     */
     public void updateBullets(float deltaTime) {
         for (Bullet b : bullets) {
             b.update(deltaTime);
@@ -148,6 +173,27 @@ public class Game {
                     score++;
                 }
             }
+        }
+    }
+    
+    /**
+     * Metodi hoitaa vihollisten tulemisen ja pelin vaikeutumisen.
+     */
+    
+    public void spawnEnemies() {
+        if (timeElapsed < 10 && timeBetweenEnemies > 1) {
+            addEnemy();
+            lastEnemyTime = curTime;
+        } else if (timeElapsed < 20 && timeBetweenEnemies > 0.5) {
+            addEnemy();
+            lastEnemyTime = curTime;
+        } else if (timeElapsed < 30 && timeBetweenEnemies > 0.1) {
+            addEnemy();
+            lastEnemyTime = curTime;
+        } else if (timeElapsed >= 30 && timeBetweenEnemies > 0.1) {
+            addEnemy();
+            addEnemy();
+            lastEnemyTime = curTime;
         }
     }
     
@@ -173,5 +219,9 @@ public class Game {
     
     public long getTimeElapsed() {
         return timeElapsed;
+    }
+    
+    public float getDeltaTime() {
+        return deltaTime;
     }
 }

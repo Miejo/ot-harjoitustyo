@@ -2,19 +2,21 @@
 
 Sovellus on peli, jossa ammutaan ylhäältä tippuvia vihollisia.
 
-Viikko 5 uudet ominaisuudet:
-- Tulostaulu lisätty
-- Vaihdettu sovelluslogiikkaa perustumaan aikaan eikä ruutupäivitykseen
-
 ## Dokumentaatio
+
+[Käyttöohje](https://github.com/Miejo/ot-harjoitustyo/blob/master/dokumentaatio/kayttoohje.md)
 
 [Arkkitehtuuri](https://github.com/Miejo/ot-harjoitustyo/blob/master/dokumentaatio/arkkitehtuuri.md)
 
 [Vaatimusmäärittely](https://github.com/Miejo/ot-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md)
 
+[Testaus](https://github.com/Miejo/ot-harjoitustyo/blob/master/dokumentaatio/testaus.md)
+
 [Työaikakirjanpito](https://github.com/Miejo/ot-harjoitustyo/blob/master/dokumentaatio/tyoaikakirjanpito.md)
 
 ## Releaset
+
+[Loppupalautus](https://github.com/Miejo/ot-harjoitustyo/releases/tag/v1.0)
 
 [Viikko 5](https://github.com/Miejo/ot-harjoitustyo/releases/tag/viikko5)
 
@@ -36,13 +38,21 @@ mvn jacoco:report
 
 ### Jar-tiedoston luonti
 
-Jar-tiedoston luodaan komennollaa
+Jar-tiedoston luodaan komennolla
 
 ```
 mvn package
 ```
 
 Luo target-hakemistoon jar-tiedoston _Spacer-1.0-SNAPSHOT.jar_. **HUOM** config.properties -tiedosto pitää olla samassa hakemistossa, jotta jar-tiedosto toimisi.
+
+### JavaDoc
+
+JavaDoc raportin saa komennolla
+
+```
+mvn javadoc:javadoc
+```
 
 ### Checkstyle
 

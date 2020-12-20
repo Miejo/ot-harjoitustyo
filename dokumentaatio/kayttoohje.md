@@ -2,7 +2,7 @@
 
 ## Lataus
 
-Sovelluksen voi ladata [tästä](). Jotta sovellus toimisi, sovelluksen hakemiston juuressa täytyy olla tiedosto config.properties, jonka sisällön täytyy olla seuraavanlainen:
+Sovelluksen jar-tiedoston voi ladata [täältä](https://github.com/Miejo/ot-harjoitustyo/releases/tag/v1.0). Jotta sovellus toimisi, sovelluksen hakemiston juuressa täytyy olla tiedosto config.properties, jonka sisällön täytyy olla seuraavanlainen:
 
 ```
 settingsFile=settings.txt

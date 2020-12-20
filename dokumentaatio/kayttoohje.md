@@ -11,6 +11,12 @@ leaderboardFile=leaderboard.db
 
 ## Käyttäminen
 
+Sovelluksen voi ajaa komentoriviltä komennolla
+
+```
+java -jar Spacer.jar
+```
+
 Sovellus avautuu alkuvalikkoon, josta voi aloittaa uuden pelin, katsella ja vaihtaa asetuksia sekä katsella tulostaulua.
 
 <img src="https://raw.githubusercontent.com/Miejo/ot-harjoitustyo/master/dokumentaatio/kuvat/menu.png" width="400">

@@ -11,7 +11,11 @@
 |24.11.|2h|Sovelluksen ohjelmointia
 ||1h|Testausta
 ||2h|Dokumentaatio
-|01.02.|4h|Sovelluksen ohjelmointia
+|01.12.|4h|Sovelluksen ohjelmointia
 ||1h|JUnit testausten tekoa
 ||1h|Sekvenssikaavio, dokumentaation päivittäminen
-|yht.|33h|
+|18.12.|2h|Sovelluksen ohjelmointia
+||2h|JUnit-testien tekoa
+|19.12.|2h|Arkkitehtuuridokumentin tekoa
+|20.12.|3h|Dokumentaation viimeistelyä
+|yht.|42h|
